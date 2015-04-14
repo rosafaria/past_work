@@ -1,0 +1,82 @@
+private static Node remove(String word) {
+		Node found = lookup(root, word);
+		if (found == null) return root;
+		if ((found.getParent()==null)&&(found.getLeft() == null) && (found.getRight()==null))
+			return null; //arvore vazia
+		if (found.getLeft()!=null) {
+			Node aux = bigger(found.getLeft());
+			found.copy(aux);
+			return deleteNode(aux);
+		}
+		else return deleteNode(found);
+	}
+	
+ 	private static Node deleteNode(Node remover) {
+		//chegando aqui de certeza que o nó ou não tem filhos ou só tem o esquerdo
+		if ((remover.isRed())||((remover.getLeft()!=null)&&(remover.getLeft().isRed()))) { //vermelho - não precisa de mais tratamentos
+			if (remover.isLeft()) {
+				if (remover.getLeft()!=null) {
+					remover.getLeft().setParent(remover.getParent());
+					remover.getLeft().setRed(false);
+				}
+				remover.getParent().setLeft(remover.getLeft());
+			}
+			else {
+				if (remover.getLeft()!=null) {
+					remover.getLeft().setParent(remover.getParent());
+					remover.getLeft().setLeft(false);
+					remover.getLeft().setRed(false);
+				}
+				remover.getParent().setRight(remover.getLeft());
+			}
+		}
+		
+		else {
+			Node s = remover.getSibling();
+			Node p = remover.getParent();
+			System.out.println("s: "+s+" p: "+p);
+			if (s.isRed()) {
+				//irmão vermelho - trocar cor com pai
+				p.setRed(true);
+				s.setRed(false);
+				if (remover.isLeft())
+					rotateRight(p);
+				else
+					rotateLeft(p);
+			}
+			if (!p.isRed() && !s.isRed() && s.blackChildren()) {
+					//todos os parentes são pretos
+					s.setRed(true);
+					deleteNode(p);
+			}
+			else if (p.isRed()&&(!s.isRed()) && s.blackChildren()){
+				s.setRed(true);
+				p.setRed(false);
+			}
+			else {
+				if (remover.isLeft() && !s.getRight().isRed() && s.getLeft().isRed()) {
+					s.setRed(true);
+					s.getLeft().setRed(false);
+					rotateLeft(s);
+				}
+				else if (!remover.isLeft() && s.getRight().isRed() && !s.getLeft().isRed() ) {
+					s.setRed(true);
+					s.getRight().setRed(false);
+					rotateRight(s);
+				}
+				s.setRed(p.isRed());
+				p.setRed(false);
+				if (remover.isLeft()) {
+					s.getRight().setRed(false);
+					rotateRight(p);
+				}
+				else {
+					remover.getSibling().getLeft().setRed(false);
+					rotateLeft(p);
+				}
+			}
+		}
+		
+		
+		return root;
+	}

@@ -1,0 +1,215 @@
+10
+RAIZ------->10: 1 Red: false Left: false
+
+
+85
+Inserted: 85
+RAIZ------->10: 1 Red: false Left: false
+10-->85: 1 Red: true Left: false
+
+RAIZ------->10: 1 Red: false Left: false
+10-->85: 1 Red: true Left: false
+
+
+15
+Inserted: 15
+RAIZ------->10: 1 Red: false Left: false
+85-->15: 1 Red: true Left: true
+10-->85: 1 Red: true Left: false
+
+ouch
+15-->10: 1 Red: true Left: true
+RAIZ------->15: 1 Red: false Left: false
+15-->85: 1 Red: true Left: false
+
+
+70
+Inserted: 70
+15-->10: 1 Red: true Left: true
+RAIZ------->15: 1 Red: false Left: false
+85-->70: 1 Red: true Left: true
+15-->85: 1 Red: true Left: false
+
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+85-->70: 1 Red: true Left: true
+15-->85: 1 Red: false Left: false
+
+
+20
+Inserted: 20
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+70-->20: 1 Red: true Left: true
+85-->70: 1 Red: true Left: true
+15-->85: 1 Red: false Left: false
+
+ouch
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+70-->20: 1 Red: true Left: true
+15-->70: 1 Red: false Left: false
+70-->85: 1 Red: true Left: false
+
+
+60
+Inserted: 60
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+70-->20: 1 Red: true Left: true
+20-->60: 1 Red: true Left: false
+15-->70: 1 Red: false Left: false
+70-->85: 1 Red: true Left: false
+
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+70-->20: 1 Red: false Left: true
+20-->60: 1 Red: true Left: false
+15-->70: 1 Red: true Left: false
+70-->85: 1 Red: false Left: false
+
+
+30
+Inserted: 30
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+70-->20: 1 Red: false Left: true
+60-->30: 1 Red: true Left: true
+20-->60: 1 Red: true Left: false
+15-->70: 1 Red: true Left: false
+70-->85: 1 Red: false Left: false
+
+ouch
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+30-->20: 1 Red: true Left: true
+70-->30: 1 Red: false Left: true
+30-->60: 1 Red: true Left: false
+15-->70: 1 Red: true Left: false
+70-->85: 1 Red: false Left: false
+
+
+50
+Inserted: 50
+15-->10: 1 Red: false Left: true
+RAIZ------->15: 1 Red: false Left: false
+30-->20: 1 Red: true Left: true
+70-->30: 1 Red: false Left: true
+60-->50: 1 Red: true Left: true
+30-->60: 1 Red: true Left: false
+15-->70: 1 Red: true Left: false
+70-->85: 1 Red: false Left: false
+
+ouch
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+30-->70: 1 Red: true Left: false
+70-->85: 1 Red: false Left: false
+
+
+65
+Inserted: 65
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+60-->65: 1 Red: true Left: false
+30-->70: 1 Red: true Left: false
+70-->85: 1 Red: false Left: false
+
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+60-->65: 1 Red: true Left: false
+30-->70: 1 Red: true Left: false
+70-->85: 1 Red: false Left: false
+
+
+80
+Inserted: 80
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+60-->65: 1 Red: true Left: false
+30-->70: 1 Red: true Left: false
+85-->80: 1 Red: true Left: true
+70-->85: 1 Red: false Left: false
+
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+60-->65: 1 Red: true Left: false
+30-->70: 1 Red: true Left: false
+85-->80: 1 Red: true Left: true
+70-->85: 1 Red: false Left: false
+
+
+90
+Inserted: 90
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+60-->65: 1 Red: true Left: false
+30-->70: 1 Red: true Left: false
+85-->80: 1 Red: true Left: true
+70-->85: 1 Red: false Left: false
+85-->90: 1 Red: true Left: false
+
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+60-->65: 1 Red: true Left: false
+30-->70: 1 Red: true Left: false
+85-->80: 1 Red: true Left: true
+70-->85: 1 Red: false Left: false
+85-->90: 1 Red: true Left: false
+
+
+40
+Inserted: 40
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: true Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+50-->40: 1 Red: true Left: true
+60-->50: 1 Red: true Left: true
+70-->60: 1 Red: false Left: true
+60-->65: 1 Red: true Left: false
+30-->70: 1 Red: true Left: false
+85-->80: 1 Red: true Left: true
+70-->85: 1 Red: false Left: false
+85-->90: 1 Red: true Left: false
+
+15-->10: 1 Red: false Left: true
+30-->15: 1 Red: false Left: true
+15-->20: 1 Red: false Left: false
+RAIZ------->30: 1 Red: false Left: false
+50-->40: 1 Red: true Left: true
+60-->50: 1 Red: false Left: true
+70-->60: 1 Red: true Left: true
+60-->65: 1 Red: false Left: false
+30-->70: 1 Red: false Left: false
+85-->80: 1 Red: true Left: true
+70-->85: 1 Red: false Left: false
+85-->90: 1 Red: true Left: false

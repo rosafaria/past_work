@@ -1,0 +1,8 @@
+are: 1
+can: 1
+do: 1
+have: 1
+what: 2
+where: 1
+with: 1
+you: 3

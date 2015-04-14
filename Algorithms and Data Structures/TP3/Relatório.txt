@@ -1,0 +1,25 @@
+1. Gráficos
+2. Escolha do MergeSort
+3. Escolha do Radix
+4. Strings
+
+1. Analisando os gráficos em anexo podemos observar que, como esperado, o InsertionSort é o mais lento dos 3, sendo óbvio que é O(n^2).
+	Já os resultados dos outros dois algoritmos têm algumas anomalias não esperadas. Vê-se uma discrepância entre os valores obtidos para o ficheiro com 40% dos dados com os restantes; pensa-se que se poderá dever à gestão do próprio computador quanto à memória e à paralelização dos cálculos.
+	Verifica-se ainda que o Mergesort tem melhor desempenho que o Radix LSD, facto que se deve provavelmente ao desempenho do Radix LSD depender do tamanho da palavra do computador. Dado que o tamanho das chaves não coincide com o tamanho da palavra do computador, o seu desempenho não é o melhor possível.
+	Uma nota quanto aos valores usados para os gráficos de comparação: tanto os gráficos n*log(n) como n*k/d foram multiplicados por factores aproximados apenas para permitir analisar a tendência dos algoritmos utilizados.
+
+2. Para a Tarefa B foi escolhido o in-place Mergesort (top-down), por ter uma complexidade temporal e espacial baixa. Em termos de complexidade temporal, está é de O(n * log(n)). Dos algoritmos dados nesta cadeira faz parte do grupo com menor complexidade temporal, tendo ainda uma complexidade espacial O(n) (apenas são usados um array com todos os elementos e um outro array do mesmo tamanho auxiliar para fazer o merge). É um bom algoritmo para grandes quantidades de dados.
+Para este ordenamento foram usados os dois valores (lat e lon), tendo sido criado um método para comparação dos pontos que levasse este facto em conta. Poder-se-ia também usar a abordagem usada na Tarefa C, que teria melhor desempenho.
+
+3. No caso da Tarefa C foi escolhido o algoritmo Radix LSD, com Counting Sort. Sabemos que o Counting Sort é altamente eficiente para a ordenação de valores inteiros, e dado que no Radix ordenamos dígito a dígito era o algoritmo ideal.
+Foi decidido usar o LSD ao invés do MSD por termos chaves de tamanho fixo (k = 7), poupando assim memória por não termos de fazer buckets (o custo de memória é de O(n)). Isto é possível porque o Counting Sort é um algoritmo estável (sendo o LSD também estável).
+Este algoritmo é ainda de fácil implementação.
+Para este ordenamento construiram-se chaves do tipo string que representavam um inteiro cujos 4 primeiros dígitos representam a latitude e os 3 últimos a longitude. Isto permitiu o acesso mais rápido a cada dígito (sem ser necessário fazer cálculos de divisões e truncagens - que como observámos neste trabalho levam a bastantes erros), sendo calculado o valor do dígito apenas pela diferença entre os valores ASCII dos caracteres com o caractere '0'.
+
+
+
+4. A decisão que mais impacto teve sobre o tempo de execução de todo o programa foi o modo como os dados foram representados.
+Inicialmente foi divisada uma estratégia em que cada ponto era caracterizado por 2 strings: um teria características que permitissem a ordenação de forma correcta (somando 360 ao valor da longitude para que o string não tivesse valores negativos), e o outro com o formato necessário para impressão.
+Na tarefa A tornou-se claro que esta estratégia era muito lenta dada a comparação de strings, chegando a ser 10 vezes mais lenta do que comparando primeiro a latitude, e depois a longitude com os pontos com igual latitude, não sendo sequer aceite a primeira versão no Mooshak.
+O uso de strings implicava também maior complexidade espacial (particularmente por serem necessárias duas), pelo que se concluiu que era uma abordagem a evitar ao máximo.
+O método usado na Tarefa C foi o mais eficiente, juntando os dois valores num só inteiro.

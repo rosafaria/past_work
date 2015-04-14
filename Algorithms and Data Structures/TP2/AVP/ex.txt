@@ -1,0 +1,76 @@
+50->10
+85
+74->50
+--->74
+89->90
+50->54
+86->80
+80->75 red
+89->87
+74->86
+86->89 red
+89->87
+87->88
+REMOVE 85
+90->91 red
+
+
+10
+85
+50
+74
+90
+54
+80
+75
+87
+86
+89
+87
+88
+REMOVE 85
+91
+
+
+50-->10: 1 Red: false Left: true
+74-->50: 1 Red: false Left: true
+50-->54: 1 Red: false Left: false
+RAIZ------->74: 1 Red: false Left: false
+80-->75: 1 Red: true Left: true
+85-->80: 1 Red: false Left: true
+87-->85: 1 Red: false Left: true
+85-->86: 1 Red: true Left: false
+74-->87: 2 Red: true Left: false
+89-->88: 1 Red: true Left: true
+87-->89: 1 Red: true Left: false
+89-->90: 1 Red: false Left: false
+
+
+j s
+s
+s
+s
+s
+j
+s
+jjj
+xxxxxxx
+x
+A
+eugostoedoverao
+REMOVE
+hi
+REMOVE s
+remove
+REMOVE remove
+REMOVE REMOVE
+REMOVE REMOVE REMOVE
+REMOVE l
+l
+REMOVE l
+l
+x
+remove REMOVE
+z
+REMOVE remove remove REMOVE remove l REMOVE
+l remove REMOVE z

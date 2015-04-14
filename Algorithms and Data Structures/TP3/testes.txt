@@ -1,0 +1,34 @@
+Ordenação A =97394528
+Ordenação A =504691466
+Ordenação A =1610416757
+Ordenação A =3364368976
+Ordenação A =6517811534
+Ordenação A =11114108660
+
+Ordenação B =37618346
+Ordenação B =141974528
+Ordenação B =42242768
+Ordenação B =49264089
+Ordenação B =69336830
+Ordenação B =71990998
+
+Ordenação C=25800019
+Ordenação C=85546690
+Ordenação C=53181504
+Ordenação C=98418471
+Ordenação C=102469973
+Ordenação C=191345118
+
+Ordenação B =31750564
+Ordenação B =131886511
+Ordenação B =44907842
+Ordenação B =62804384
+Ordenação B =66230358
+Ordenação B =80865809
+
+Ordenação C=25468329
+Ordenação C=120666769
+Ordenação C=61226768
+Ordenação C=94983515
+Ordenação C=132825126
+Ordenação C=175875629

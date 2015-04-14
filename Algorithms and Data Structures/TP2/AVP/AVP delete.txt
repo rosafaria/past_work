@@ -1,0 +1,70 @@
+if (remover.isRed()) return deleteRed(remover); //apagar vermelho - remoção normal
+		
+		if (remover.hasNoChildren()) {
+			if (remover.getParent()==null)
+				return null; //raiz sem filhos
+			//senão é folha
+			if (remover.getSibling().isRed()) {
+				remover.getParent().setRed(true);
+				remover.getSibling().setRed(false);
+			}
+			
+			//*******************TO DO**************************//
+		}
+		
+		if (remover.hasOneChild()) { //só tem um filho - tem de ser folha vermelha
+			Node aux;
+			if (remover.getLeft() == null) {
+				aux = remover.getRight();
+			}
+			else {
+				aux = remover.getLeft();
+			}
+			
+			aux.setRed(false); //passa a preto
+			aux.setParent(remover.getParent()); //actualiza ponteiro para pai
+			
+			if (remover.getParent()!=null) { //se não for raiz actualiza ponteiro do pai
+				if (remover.isLeft()) remover.getParent().setLeft(aux);
+				else remover.getParent().setRight(aux);
+				return root;
+			}
+			else return null;
+		}
+		
+		else { //tem dois filhos
+			Node sibling; //ver irmão
+			if (remover.isLeft()) sibling = remover.getParent().getRight();
+			else sibling = remover.getParent().getRight();
+				
+			if (remover.blackChildren()) {
+				if (sibling.blackChildren()) {
+					
+				}
+			}
+			else if (remover.redChildren()) {
+				//bleble
+			}
+			else {//one is red and one is black
+				
+				
+			}
+		}
+		
+		return root;
+	}
+	
+	private static Node deleteRed(Node remover) {
+		if (remover.getRight()==null) { //nao é preciso testar esquerda porque nunca vai ter só um filho
+			if (remover.isLeft())
+				remover.getParent().setLeft(null);
+			else remover.getParent().setRight(null);
+		}
+		
+		//se não for folha é nó com 2 filhos pretos
+		Node aux = bigger(remover.getLeft());
+		remover.copy(aux);
+		deleteNode (aux);
+		return null;
+	}
+	

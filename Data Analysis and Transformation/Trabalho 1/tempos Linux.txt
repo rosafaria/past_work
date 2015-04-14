@@ -1,0 +1,40 @@
+>> ex13
+Elapsed time is 1.199808 seconds.
+>> ex14
+
+Trap =
+
+   65.1880
+
+
+Simp =
+
+   65.1880
+
+Elapsed time is 0.064533 seconds.
+>> ex15
+
+E =
+
+  680.4350
+
+Elapsed time is 0.002535 seconds.
+
+
+Octave----------------
+
+ex14: comentar simbólica
+
+Trap =  65.188
+Simp =  65.188
+Elapsed time is 0.00732 seconds.
+
+ex13
+>>> ex13
+Elapsed time is 0.227 seconds.
+
+>>> ex15
+E =  680.44
+Elapsed time is 0.00025 seconds.
+
+

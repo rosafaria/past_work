@@ -1,0 +1,140 @@
+
+	private static Node whereToGo (Node node, String word) {
+		Node X = node;
+		Node r = X.getRight();
+		Node l = X.getLeft();
+		if (word.compareToIgnoreCase(X.getWord())>0) {
+			if (l.getWord().compareToIgnoreCase(X.getWord())>0)
+				return l;
+			return r;
+		}
+		return l;
+	}
+	
+
+private static void remove (Node start, String word) {
+		Node found = lookup(root, word);
+		if (found == null) return ;
+		if ((found.getParent()==null)&&(found.getLeft() == null) && (found.getRight()==null)) {
+			root = null; //arvore vazia
+			return;
+		}
+		if (found.getLeft()!=null) {
+			Node aux = bigger(found.getLeft());
+			found.copy(aux);
+			aux.setWord(word);
+			print(root);
+		} 
+		step2(root,word);
+	}
+	
+	private static void step2 (Node start, String word) {
+		if (start == null) return;
+		Node X = start;
+		while(!X.getWord().equals(word)) {
+			if (X.blackChildren()) {
+				X.setRed(true);
+				X = whereToGo(X,word);
+			}
+			else {
+				step2B(X, word);
+				return;
+			}
+		}
+		step2A(X);
+	}
+	
+	private static void step2A(Node X) {
+		//X has 2 black children
+		Node T = X.getSibling();
+		if (T == null) {
+			deleteNode(X);
+			return;
+		}
+		Node P = X.getParent();
+		if (T.blackChildren()) {
+			System.out.println("case 1");
+			X.setRed(true);
+			T.setRed(true);
+			P.setRed(false);
+		}
+		else if ((T.getLeft()!=null) && (T.getLeft().isRed())) {
+			System.out.println("case 2");
+			rotateLeft(T);
+			rotateRight(P);
+			X.setRed(true);
+			P.setRed(false);
+		}
+		else //if ((T.getRight()!=null) && (T.getRight().isRed())){
+		{
+			System.out.println("case 3");
+			rotateLeft(P);
+			X.setRed(true);
+			P.setRed(false);
+			T.setRed(true);
+		}
+		deleteNode(X);
+	}
+	
+	private static void step2B (Node newRoot, String word) {
+		//X has at least one red child
+		Node X = newRoot;
+		X = whereToGo(X,word);
+		
+		while (X.isRed() && !X.getWord().equals(word)) {
+			System.out.println("2B -> X: "+X);
+			X = whereToGo(X,word);
+		}
+		if (!X.isRed()) {
+			Node P = X.getParent();
+			Node T = X.getSibling();
+			System.out.println("X: "+X);
+			if (X.isLeft()) {
+				rotateLeft(P);
+				P.setRed(true);
+				T.setRed(false);
+			}
+			else {
+				rotateRight(P);
+				P.setRed(true);
+				T.setRed(false);
+			}
+			step2(X, word);
+		}
+	}
+	
+	private static void deleteNode (Node node) {
+		if (node == null) return;
+		
+		System.out.println("Finally: ");
+		print(root);
+		System.out.println("\n");
+		if (node.isLeft()) {
+			if (node.getLeft()!=null) {
+				node.getLeft().setParent(node.getParent());
+				node.getLeft().setRed(false);
+				node.getParent().setLeft(node.getLeft());
+			}
+			else if (node.getRight()!=null) {
+				node.getRight().setParent(node.getParent());
+				node.getRight().setRed(false);
+				node.getRight().setLeft(true);
+				node.getParent().setLeft(node.getRight());
+			}
+			else node.getParent().setLeft(null);
+		}
+		else {
+			if (node.getLeft()!=null) {
+				node.getLeft().setParent(node.getParent());
+				node.getLeft().setLeft(false);
+				node.getParent().setRight(node.getLeft());
+			}
+			else if (node.getRight()!=null) {
+				node.getRight().setParent(node.getParent());
+				node.getParent().setRight(node.getRight());
+			}
+			else node.getParent().setRight(null);
+			
+		}
+		root.setRed(false);
+	}

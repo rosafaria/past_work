@@ -1,0 +1,330 @@
+package aedois;
+
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class AVP2 {
+	public class Tree {
+	
+	private int deleted = 0;
+	private Node root;
+	
+	private class Node { 
+		private Node left; 
+		private Node right;
+		private Node parent;
+		private int num;
+		private String word;
+		private boolean red;
+		private boolean pLeft; //true if it is the left of the parent
+
+		Node(String NewWord) { 
+			left = null; 
+			right = null;
+			parent = null;
+			pLeft = false;
+			red = true;
+			word = NewWord;
+			num = 1;
+			
+		}
+		
+		public void setWord(String word) {
+			this.word = word;
+		}
+	
+		public void addOne () {
+			this.num++;
+		}
+		
+		@Override
+		public String toString () {
+			if (this==null) return "";
+			//return this.getWord()+": "+this.getNum();
+			//for debug
+			String out;
+			if (root==this) out = "RAIZ------->";
+			else out = this.getParent().getWord()+"-->";
+			return out+this.getWord()+": "+this.getNum()+" Red: "+this.isRed()+" Left: "+this.isLeft();
+		}
+		
+		public boolean equals (Node node) {
+			if ((this == null)||(node==null)) return false;
+			return this.getWord().equals(node.getWord());
+		}
+
+		/**
+		 * @return the red
+		 */
+		public boolean isRed() {
+			return red;
+		}
+
+		public void setRed(boolean red) {
+			this.red = red;
+		}
+
+		public boolean isLeft() {
+			return pLeft;
+		}
+
+		public void setLeft(boolean pLeft) {
+			this.pLeft = pLeft;
+		}
+
+		public Node getLeft() {
+			return left;
+		}
+
+		public void setLeft(Node left) {
+			this.left = left;
+		}
+
+		public Node getRight() {
+			return right;
+		}
+
+		public void setRight(Node right) {
+			this.right = right;
+		}
+
+		public Node getParent() {
+			return parent;
+		}
+
+		public void setParent(Node parent) {
+			this.parent = parent;
+		}
+
+		public int getNum() {
+			return num;
+		}
+
+		public String getWord() {
+			return word;
+		}
+		
+		public Node getSibling () {
+			if (this.parent==null) return null;
+			if (this.isLeft()) return this.getParent().getRight();
+			else return this.getParent().getLeft();
+		}
+		
+		public void delete() {
+			this.num = 0;
+		}
+		
+	}
+	
+	public Tree (){
+		root = null;
+		deleted = 0;
+	}
+	
+	/**Insertion "aids"**/
+	
+	private void checkColors (Node node, Node child) {
+		Node current = node;
+		Node prev = child;
+		while ((current.getParent()!=null)&&(current.isRed())) {
+			Node sibling = current.getSibling();
+			
+			//father is black and sibling is red
+			if ((sibling!=null)&&(sibling.isRed())) {
+				flipColor(current.getParent());
+				if ((current.getParent().getParent()!=null)&&(current.getParent().isRed())) {
+					prev = current.getParent();
+					current = current.getParent().getParent();
+				}
+			}
+			else {
+				if (prev.isLeft()!=current.isLeft()) { //child on the same side as the parent
+					rotateRight(current);
+					prev = current;
+					current = prev.getParent();
+				}
+				else {
+					Node aux = current.getParent();
+					if (prev.isLeft()) {
+						rotateRight(current.getParent());
+					}
+					else {
+						rotateLeft(current.getParent());
+					}
+					aux.setRed(true);
+					current.setRed(false);
+				}
+			}
+		}
+		if (node.getParent()==null) node.setRed(false);
+	}
+	
+	private void flipColor (Node node) {
+		node.getLeft().setRed(node.isRed());
+		node.getRight().setRed(node.isRed());
+		node.setRed(!node.isRed());
+	}
+	
+	/**Rotations**/
+	private void rotateRight(Node k1) {
+		Node k2 = k1.getLeft();
+		k1.setLeft(k2.getRight());
+		if (k1.getLeft()!=null)
+			k1.getLeft().setLeft(true);
+		k2.setRight(k1);
+		k1.setLeft(false);
+
+		if (k1.getParent() == null)
+			root = k2;
+		else if (!k1.isLeft()) {
+			k1.getParent().setRight(k2);
+			k2.setLeft(false);
+		}
+		else k1.getParent().setLeft(k2);
+		
+		k2.setParent(k1.getParent());
+		k1.setParent(k2);
+		if (k1.getLeft()!=null)
+			k1.getLeft().setParent(k1);
+	}
+	
+	private void rotateLeft(Node k1) {
+		Node k2 = k1.getRight();
+		k1.setRight(k2.getLeft());
+		if (k1.getRight()!=null)
+			k1.getRight().setLeft(false);
+		k2.setLeft(k1);
+		k1.setLeft(true);
+		
+		if (k1.getParent() == null) //k1 é raiz
+			root = k2;
+		
+		else if (k1.isLeft()) {
+			k1.getParent().setLeft(k2);
+			k2.setLeft(true);
+		}
+		else k1.getParent().setRight(k2);
+		
+		k2.setParent(k1.getParent());
+		k1.setParent(k2);
+		if (k1.getRight()!=null)
+			k1.getRight().setParent(k1);
+	}
+	
+	
+	/**Insertion**/
+	private Node lookup(Node node, String word) { //Devolve o nó com a palavra word se existir
+		Node aux = node;
+		while ((aux!=null)&&(!word.equals(aux.getWord()))) {
+			if (word.compareToIgnoreCase(aux.getWord())>0) 
+				aux = aux.getRight();
+			else
+				aux = aux.getLeft();
+		}
+		return aux;
+		
+	}
+ 
+	private Node add(String word) { 
+		Node found = lookup(root, word);
+		if (found == null) {
+			root = insert(root, word);
+			if (root.isRed()) root.setRed(false);
+		}
+		else {
+			found.addOne();
+		}
+		return root;
+	}
+ 
+	private Node insert(Node node, String word) {
+		if (node == null) {
+			Node aux = new Node(word);
+			aux.setRed(false);
+			return aux;
+		} //é raiz!
+		
+		if (word.compareToIgnoreCase(node.getWord())<0)
+			if (node.getLeft()==null) {
+				node.setLeft(new Node(word));
+				node.getLeft().setParent(node);
+				node.getLeft().setLeft(true);
+				
+				//System.out.println("Inserted: "+node.getLeft().getWord());
+				//print(root);
+				//System.out.println("");
+				if (node.isRed()) {
+					checkColors(node, node.getLeft());
+				}
+			}
+			else insert(node.getLeft(), word);
+		
+		else if (word.compareToIgnoreCase(node.getWord())>0)
+			if (node.getRight()==null) {
+				node.setRight(new Node(word));
+				node.getRight().setParent(node);
+				
+				//System.out.println("Inserted: "+node.getRight().getWord());
+				//print(root);
+				//System.out.println("");
+				if (node.isRed())	
+					checkColors(node, node.getRight());
+			}
+			else insert(node.getRight(), word);
+		if (node.getParent()!=null) return node.getParent();
+		else return node;
+	}
+
+	/**Removal**/
+	private void remove (String word) {
+		Node found = lookup(root, word);
+		if (found == null) return ;
+		if ((found.getParent()==null)&&(found.getLeft() == null) && (found.getRight()==null)) {
+			root = null; //arvore vazia
+			return;
+		}
+		found.delete(); //põe contador a zeros
+		deleted++;
+	}
+	
+	private void print (Node node) {
+		if (node==null) return;
+		if (node.getLeft()!=null) print (node.getLeft());
+		System.out.println(""+node);
+		if (node.getRight()!=null) print(node.getRight());
+	}
+	}
+	private static Tree copyTree(Tree start) {
+		Tree newTree = null;
+		
+		return newTree;
+	}
+	public static void main(String[] args){
+		Tree BR = new Tree();
+;		Scanner sc = new Scanner(System.in);
+		String line = sc.nextLine();
+		String word;
+		
+		while(!line.equals("")) {
+			StringTokenizer palavras = new StringTokenizer(line);
+			while (palavras.hasMoreTokens()) {
+				word = palavras.nextToken();
+				if ("REMOVE".equals(word)) {
+					while (("REMOVE".equals(word))&&(palavras.hasMoreTokens())) {
+						word = palavras.nextToken();
+					}
+					if (!word.equals("REMOVE")) {
+						word = word.toLowerCase();
+						remove(word);
+					}
+				}
+				else {
+					word = word.toLowerCase();
+					root = add (word);
+				}
+			}
+			line = sc.nextLine();
+		}
+		print(root);
+	}
+}

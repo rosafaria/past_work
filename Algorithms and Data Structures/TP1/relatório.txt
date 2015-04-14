@@ -1,0 +1,53 @@
+Cuidados Medições:
+	Mediu-se o tempo gasto apenas na execução do algoritmo, excluindo tanto a leitura dos dados, como a impressão dos resultados no ecrã. Os programas foram também executados várias vezes, permitindo determinar um resultado mais preciso, por haver claramente mais acontecimentos de um determinado valor, sendo esse o valor indicado.
+	
+Complexidades Espaciais:
+	A: Neste caso a complexidade é constante, pois é usado um número fixo de variáveis.
+
+	B: Nesta abordagem são criadas, em cada recursão, 2 variáveis novas (no meu caso; num caso genérico serão k variáveis novas, k constante para cada chamada); dado que existem 2^N chamadas à função recursiva, serão criadas k*2^N variáveis; teremos então uma complexidade espacial de O(2^N).
+		
+	
+	C: No caso da abordagem de Knapsack 0/1 teremos, para além do array inicial de leituras, um array auxiliar que representa uma tabela cujo número de linhas é o número de anúncios + 1 e o número de colunas é o nº de segundos + 1, havendo além desta um número fixo de variáveis auxiliares. Assim sendo, a complexidade espacial será de O(n*m), e portanto será uma complexidade linear.
+		
+	
+Complexidades Temporais:
+	A:	
+		Nesta abordagem o array dos dados apenas é percorrido, no máximo, uma vez, pois são escolhidos os primeiros elementos até preencher o tempo (dado que os dados de entrada vêm já ordenados) pelo que a sua complexidade é linear (O(n)).
+		No entanto, é a abordagem menos indicada, porque não dá a	solução óptima e poderá até dar resultados muito pouco adequados ao problema.
+
+	B:
+		Neste caso da abordagem de força-bruta é usada uma solução recursiva, em que, em cada chamada à função, são feitas mais duas. Obtemos assim uma árvore binária, pelo que terá uma complexidade O(2^N), por ter 2^N-1 operações. 
+		Esta abordagem percorre, assim, todas as combinações de anúncios, até encontrar a melhor solução, tendo porém uma complexidade incomportável.
+	
+	C:
+		Sendo n o nº de anúncios e m o tempo, teremos uma tabela n*m. Assim, dado que temos de calcular cada elemento desta tabela, teremos n*m operações, e portanto uma complexidade O(n*m), ou seja, uma complexidade linear em ordem ao nº de anúncios.
+		Temos assim um algoritmo com uma solução óptima, e com uma complexidade muito mais desejável que a da abordagem da alínea B.
+	
+
+
+3 Aspectos:
+	A:
+		- Não garante solução óptima
+		- Complexidade Temporal Linear
+		- Complexidade Espacial Constante
+	B:
+		- Garante solução óptima
+		- Complexidade Temporal Exponencial
+		- Complexidade Espacial Exponencial
+	C:
+		- Garante solução óptima
+		- Complexidade Temporal Linear
+		- Complexidade Espacial Linear
+		
+
+Optimizações:
+
+	Para todos os algoritmos, os casos de o nº de anuncios ser 0 ou o tempo ser 0 nem sequer são executados os algoritmos e é logo devolvido 0 após a leitura de todos os dados. Além disso, aquando da leitura da lista de anuncios, se o anuncio tiver uma duração superior à total já não será armazenado no array de leituras, poupando cálculos e espaço.
+	No caso do exercício B, se o tempo total for ultrapassado é logo devolvido 0, não desenvolvendo a árvore até ao último índice.
+	
+	
+Medições confirmam:
+	
+	Observando os gráficos em anexo, podemos verificar que as medições confirmam de facto o estudo feito.
+	De notar em particular que no caso da alínea C, as medidas só por si não confirmariam a linearidade da complexidade; porém, foi feito um gráfico auxiliar (C/t) em que se divide as medições pelo nº de segundos de cada exemplo (lembro que era O(n*m)), obtendo assim a linearidade, por eliminarmos a relação com a duração do espaço de anúncio.
+	Em todos os casos foi utilizado o valor do caso i50 em detrimento dos restantos casos com 50 anúncios.
